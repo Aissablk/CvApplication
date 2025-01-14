@@ -7,15 +7,17 @@ export default function SelfInputs(){
 }
 
 function ShowingSelfInputs(){
-    const { handleChange, errors } = StringOnlyInput();
+    const { handleChange, errors, message } = StringOnlyInput();
     return (
         
         inputs.map(({id,input}) =>
             
         <form>
              <div key ={id}>    
-            <input placeholder={input} onChange={(event) => handleChange(event, id)} /> 
-            {errors && id <= 1 && <div style={{ color: 'red' }}>{errors}</div>}
+            <input placeholder={input} onChange={(event) => handleChange(event, id)}   /> 
+             
+            {errors[id] && <div style={{ color: 'red' }}>{errors[id]}</div>}
+            {message[id] && <div style={{ color: 'green' }}>{message[id]}</div>} 
             </div> 
 
         </form>
@@ -25,13 +27,21 @@ function ShowingSelfInputs(){
 }
 
 function StringOnlyInput() {
-    const [errors, setErrors] = useState(""); 
+    const [errors, setErrors] = useState({}); 
+    const [message, setMessage] = useState({});
   const handleChange = (event, id) => {
     const value = event.target.value;
 
-return (( id === 0 || id === 1) && !/^[a-zA-Z]+$/test(value)? 
-      setErrors("u must enter a string" ): setErrors("enter a string"))
-    } 
-  return {handleChange,errors}
+    if( id === 0 || id == 1) {
+         if (!/^[a-zA-Z]+$/.test(value)) {
+            setErrors((prevErrors) => ({ ...prevErrors, [id]: 'You must enter a valid string' }));
+            setMessage((prevMessage) => ({ ...prevMessage, [id]: '' }));
+        } else {
+            setErrors((prevErrors) => ({ ...prevErrors, [id]: '' })); 
+            setMessage((prevMessage) => ({ ...prevMessage, [id]: 'Keep going!' }));
+        }
+    }
+}
+return {handleChange,errors,message}
 }
     

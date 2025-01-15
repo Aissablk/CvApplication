@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import {inputs} from './inputs.js';
+import { Buttons } from '../../Utils/Buttons.jsx'
+
+
+
 export default function SelfInputs(){
     return(
+        <div> 
         <ShowingSelfInputs />
+        <Buttons />
+        </div>
     )
 }
 
@@ -18,6 +25,7 @@ function ShowingSelfInputs(){
              
             {errors[id] && <div style={{ color: 'red' }}>{errors[id]}</div>}
             {message[id] && <div style={{ color: 'green' }}>{message[id]}</div>} 
+           
             </div> 
 
         </form>

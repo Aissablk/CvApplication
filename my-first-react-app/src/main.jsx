@@ -8,14 +8,17 @@ import AllInputsEducations from './Components/Form/EducationInofrmations.jsx'
 import AllInputsWork from './Components/Form/WorkExperience.jsx'
 import { Modal } from '@mui/material'
 import { Modele } from './Components/Model/model.jsx'
+import { FormProvider } from './Components/Form/context.jsx';
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <FormProvider>
     <SelfInputs />
     <AllInputsEducations />
     <AllInputsWork />
     <Modele /> 
+    </FormProvider>
   </StrictMode>,
 )

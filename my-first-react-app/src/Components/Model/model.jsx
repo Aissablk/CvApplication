@@ -6,7 +6,7 @@ export function Modele({selfInform}){
             </header>
             <div>
                 <section>
-                
+                Self Information
                 <div
                         style={{
                             marginTop: "20px",
@@ -28,9 +28,6 @@ export function Modele({selfInform}){
           </section>
         </div>
        <div>
-        
-                    Self Information
-                
                 <section>
                     Educationel Information
                 </section>

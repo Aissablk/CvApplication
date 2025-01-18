@@ -2,31 +2,32 @@ import { useState } from 'react';
 import {inputs} from './inputs.js';
 import { Buttons } from '../../Utils/Buttons.jsx'
 import { Modele } from "../Model/model.jsx";
-
-
+import { useContext } from 'react';
+import { FormContext } from './context.jsx';
 export default function SelfInputs(){
-    const [selfInform,SetselfInform]=useState({});
-    const [showInfo,SetshowInfo]=useState(false);
+    const { selfInform, updateSelfInform, toggleShowInfo } = useContext(FormContext);
+  
 
     const handlAdd =(e) => {
         
             e.preventDefault();
-            SetshowInfo(true);
+            toggleShowInfo();
+           
         
     }
-    return(
-        <div>
+    return( 
+        <div> 
         <form> 
-        <ShowingSelfInputs  SetselfInform={SetselfInform}/>
+        <ShowingSelfInputs updateSelfInform={updateSelfInform}/>
         <Buttons onClick={handlAdd} />
         </form>
-        <Modele  selfInform={showInfo ? selfInform : {}} /> 
+        
         </div> 
         
     )
 }
 
-function ShowingSelfInputs({SetselfInform}){
+function ShowingSelfInputs({updateSelfInform}){
     const { handleChange, errors, message } = StringOnlyInput();
     return (
         
@@ -35,7 +36,7 @@ function ShowingSelfInputs({SetselfInform}){
         
              <div key ={id}>    
             <input placeholder={input} onChange={(event) => {handleChange(event, id);
-             SetselfInform((prev) => ({ ...prev, [id]: event.target.value })); 
+             updateSelfInform((prev) => ({ ...prev, [id]: event.target.value })); 
         }}   /> 
              
             {errors[id] && <div style={{ color: 'red' }}>{errors[id]}</div>}

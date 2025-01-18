@@ -1,34 +1,49 @@
 import { useState } from 'react';
 import {inputs} from './inputs.js';
 import { Buttons } from '../../Utils/Buttons.jsx'
-
+import { Modele } from "../Model/model.jsx";
 
 
 export default function SelfInputs(){
+    const [selfInform,SetselfInform]=useState({});
+    const [showInfo,SetshowInfo]=useState(false);
+
+    const handlAdd =(e) => {
+        
+            e.preventDefault();
+            SetshowInfo(true);
+        
+    }
     return(
-        <div> 
-        <ShowingSelfInputs />
-        <Buttons />
-        </div>
+        <div>
+        <form> 
+        <ShowingSelfInputs  SetselfInform={SetselfInform}/>
+        <Buttons onClick={handlAdd} />
+        </form>
+        <Modele  selfInform={showInfo ? selfInform : {}} /> 
+        </div> 
+        
     )
 }
 
-function ShowingSelfInputs(){
+function ShowingSelfInputs({SetselfInform}){
     const { handleChange, errors, message } = StringOnlyInput();
     return (
         
         inputs.map(({id,input}) =>
             
-        <form>
+        
              <div key ={id}>    
-            <input placeholder={input} onChange={(event) => handleChange(event, id)}   /> 
+            <input placeholder={input} onChange={(event) => {handleChange(event, id);
+             SetselfInform((prev) => ({ ...prev, [id]: event.target.value })); 
+        }}   /> 
              
             {errors[id] && <div style={{ color: 'red' }}>{errors[id]}</div>}
             {message[id] && <div style={{ color: 'green' }}>{message[id]}</div>} 
            
             </div> 
 
-        </form>
+        
             
     )
     )

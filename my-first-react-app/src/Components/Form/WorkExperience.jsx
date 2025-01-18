@@ -1,7 +1,12 @@
+import { Buttons } from '../../Utils/Buttons.jsx';
 import {inputs_work} from './inputs.js';
+
 export default function AllInputsWork(){
     return(
+        <form> 
         <ShowingInputsWork />
+        <Buttons />
+        </form> 
     )
 }
 

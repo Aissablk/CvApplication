@@ -1,4 +1,7 @@
-export function Modele({selfInform}){
+import { useContext } from "react";
+import { FormContext } from "../Form/context";
+export function Modele(){
+    const { selfInform, showInfo } = useContext(FormContext);
     return(
         <div>
             <header>
@@ -14,14 +17,12 @@ export function Modele({selfInform}){
                             padding: "10px",
                         }}
                     >
-                        {Object.keys(selfInform || {}).length === 0 ? (  // Add null check
-                            <p>No information provided yet.</p>
-                        ) : (
+                    {showInfo && Object.keys(selfInform || {}).length > 0 ? (
                             Object.entries(selfInform).map(([key, value]) => (
-                                <p key={`info-${key}`}>  
-                                     {value} 
-                                </p>
+                                <p key={`info-${key}`}>{value}</p>
                             ))
+                        ) : (
+                            <p>No information provided yet.</p>
                         )}
                     </div>
         

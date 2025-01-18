@@ -18,7 +18,7 @@ export default function SelfInputs(){
     return( 
         <div> 
         <form> 
-        <ShowingSelfInputs updateSelfInform={updateSelfInform}/>
+        <ShowingSelfInputs  updateSelfInform={updateSelfInform} selfInform={selfInform}/>
         <Buttons onClick={handlAdd} />
         </form>
         
@@ -27,7 +27,7 @@ export default function SelfInputs(){
     )
 }
 
-function ShowingSelfInputs({updateSelfInform}){
+function ShowingSelfInputs({updateSelfInform,selfInform}){
     const { handleChange, errors, message } = StringOnlyInput();
     return (
         
@@ -36,7 +36,7 @@ function ShowingSelfInputs({updateSelfInform}){
         
              <div key ={id}>    
             <input placeholder={input} onChange={(event) => {handleChange(event, id);
-             updateSelfInform((prev) => ({ ...prev, [id]: event.target.value })); 
+             updateSelfInform((prev) => ({ ...selfInform, [id]: event.target.value })); 
         }}   /> 
              
             {errors[id] && <div style={{ color: 'red' }}>{errors[id]}</div>}

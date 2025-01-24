@@ -12,11 +12,11 @@ export default function AllInputsWork(){
 
 function ShowingInputsWork(){
     return (
-        inputs_work.map(({id,input}) =>
+        inputs_work.map((item) =>
             
         <form>
-             <div key ={id}>    
-            <input placeholder={input} /> 
+             <div key ={item.id}>    
+            <input placeholder={item.label} /> 
             </div> 
 
         </form>

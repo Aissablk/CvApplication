@@ -17,7 +17,7 @@ export default function SelfInputs(){
     }
     return( 
         <div> 
-        <form> 
+        <form > 
         <ShowingSelfInputs  updateSelfInform={updateSelfInform} selfInform={selfInform}/>
         <Buttons onClick={handlAdd} />
         </form>
@@ -31,16 +31,16 @@ function ShowingSelfInputs({updateSelfInform,selfInform}){
     const { handleChange, errors, message } = StringOnlyInput();
     return (
         
-        inputs.map(({id,input}) =>
+        inputs.map((item) =>
             
         
-             <div key ={id}>    
-            <input placeholder={input} onChange={(event) => {handleChange(event, id);
-             updateSelfInform((prev) => ({ ...selfInform, [id]: event.target.value })); 
+             <div key ={item.id}>    
+            <input placeholder={item.label} onChange={(event) => {handleChange(event, item); 
+             updateSelfInform((prev) => ({ ...selfInform, [item.id]: event.target.value })); 
         }}   /> 
              
-            {errors[id] && <div style={{ color: 'red' }}>{errors[id]}</div>}
-            {message[id] && <div style={{ color: 'green' }}>{message[id]}</div>} 
+            {errors[item.id] && <div style={{ color: 'red' }}>{errors[item.id]}</div>}
+            {message[item.id] && <div style={{ color: 'green' }}>{message[item.id]}</div>} 
            
             </div> 
 
@@ -53,16 +53,16 @@ function ShowingSelfInputs({updateSelfInform,selfInform}){
 function StringOnlyInput() {
     const [errors, setErrors] = useState({}); 
     const [message, setMessage] = useState({});
-  const handleChange = (event, id) => {
+  const handleChange = (event, input ) => {
     const value = event.target.value;
-
-    if( id === 0 || id == 1) {
+ 
+    if( input.labelname === "nom" ||  input.labelname === "prenom" ) { 
          if (!/^[a-zA-Z]+$/.test(value)) {
-            setErrors((prevErrors) => ({ ...prevErrors, [id]: 'You must enter a valid string' }));
-            setMessage((prevMessage) => ({ ...prevMessage, [id]: '' }));
+            setErrors((prevErrors) => ({ ...prevErrors, [input.id]: 'You must enter a valid string' }));
+            setMessage((prevMessage) => ({ ...prevMessage, [input.id]: '' })); 
         } else {
-            setErrors((prevErrors) => ({ ...prevErrors, [id]: '' })); 
-            setMessage((prevMessage) => ({ ...prevMessage, [id]: 'Keep going!' }));
+            setErrors((prevErrors) => ({ ...prevErrors, [input.id]: '' })); 
+            setMessage((prevMessage) => ({ ...prevMessage, [input.id]: 'Keep going!' }));
         }
     }
 }
